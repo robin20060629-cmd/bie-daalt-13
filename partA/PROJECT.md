@@ -1,12 +1,31 @@
-# Project: Personal Task Tracker
+# Markdown Note-taking App
 
-## Brief
-MacOS орчинд Next.js 14 болон Prisma ашиглан хөгжүүлсэн, хайлт болон шүүлтүүрийн цогц систем бүхий даалгавар удирдах аппликейшн.
+## Зорилго
+Хэрэглэгч markdown форматаар тэмдэглэл үүсгэж, бүрэн текст хайлт хийж, PDF экспорт хийх боломжтой жижиг веб апп хөгжүүлэх.
 
-## In Scope (Хийх зүйлс)
-- **Task CRUD:** Title, description, status (TODO/IN_PROGRESS/DONE), priority, dueDate, tags.
-- **Search & Filter:** Keyword search (title, desc), Filter (status, priority, date range).
-- **State Management:** URL-д filter/search state хадгалах (?status=TODO&q=meeting).
-- **Backend:** Server-side rendering (Prisma), REST API routes (/api/tasks).
-- **Validation:** Zod schema (client + server).
-- **UI:** Responsive UI (Tailwind CSS).
+## Scope (Хамрах хүрээ)
+### ✅ Багтах зүйлс:
+* **Note CRUD:** Тэмдэглэл үүсгэх, унших, засах, устгах.
+* **Markdown Render:** Бичсэн тэмдэглэлийг preview хэлбэрээр харах.
+* **Full-text Search:** Гарчиг болон агуулгаар хайлт хийх.
+* **Tag System:** Нэг тэмдэглэлд олон tag оноох.
+* **PDF Export:** Тэмдэглэлийг PDF файл болгон татаж авах.
+* **Tech Stack:** REST API + React SPA (Frontend).
+
+### ❌ Багтахгүй зүйлс:
+* Хэрэглэгчийн бүртгэл (Auth) болон олон хэрэглэгчийн систем.
+* Real-time хамтран ажиллах (Collaboration).
+* Зураг upload хийх.
+* Мобайл апп.
+
+## Хэрэглэгчийн үндсэн урсгал (User Flow)
+1. **Note үүсгэх:** Гарчиг, markdown контент, tag-ууд оруулах.
+2. **Жагсаалт харах:** Тэмдэглэлүүдийг tag-аар шүүх, хайлт хийх.
+3. **Засах / Устгах:** Хуучин тэмдэглэлээ шинэчлэх эсвэл устгах.
+4. **Экспорт:** Тэмдэглэлийг PDF болгон татаж авах.
+
+## Амжилтын шалгуур
+* [ ] 3+ үндсэн feature бүрэн ажиллаж байгаа.
+* [ ] ≥10 unit test амжилттай pass болсон.
+* [ ] API endpoints баримтжуулсан (OpenAPI/Swagger).
+* [ ] Full-text search (бүрэн текст хайлт) ажиллаж байгаа.
