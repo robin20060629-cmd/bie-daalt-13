@@ -1,35 +1,37 @@
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
 const initSqlJs = require('sql.js');
 const fs = require('fs');
 const path = require('path');
- 
+
 const DB_PATH = path.join(__dirname, '../../notes.db');
- 
+
 let db = null;
 let SQL = null;
- 
+
 async function getDb() {
   if (db) return db;
- 
+
   SQL = await initSqlJs();
- 
+
   if (fs.existsSync(DB_PATH)) {
     const fileBuffer = fs.readFileSync(DB_PATH);
     db = new SQL.Database(fileBuffer);
   } else {
     db = new SQL.Database();
   }
- 
+
   migrate(db);
   saveDb(); // initial save
   return db;
 }
- 
+
 function saveDb() {
   if (!db) return;
   const data = db.export();
   fs.writeFileSync(DB_PATH, Buffer.from(data));
 }
- 
+
 function migrate(db) {
   db.run(`
     CREATE TABLE IF NOT EXISTS notes (
@@ -39,12 +41,12 @@ function migrate(db) {
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       updated_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
- 
+
     CREATE TABLE IF NOT EXISTS tags (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL UNIQUE
     );
- 
+
     CREATE TABLE IF NOT EXISTS note_tags (
       note_id INTEGER NOT NULL,
       tag_id INTEGER NOT NULL,
@@ -54,8 +56,7 @@ function migrate(db) {
     );
   `);
 }
- 
-// Helper: run a query and return all rows as objects
+
 function all(db, sql, params = []) {
   const stmt = db.prepare(sql);
   stmt.bind(params);
@@ -83,7 +84,7 @@ function run(db, sql, params = []) {
     changes: changes ? changes.values[0][0] : 0
   };
 }
- 
+
 function closeDb() {
   if (db) {
     saveDb();
@@ -91,8 +92,7 @@ function closeDb() {
     db = null;
   }
 }
- 
-// Full-text search (manual LIKE since sql.js has no FTS5)
+
 function searchNotes(db, query, tag) {
   const term = `%${query}%`;
   if (tag) {
@@ -110,5 +110,5 @@ function searchNotes(db, query, tag) {
     ORDER BY updated_at DESC
   `, [term, term]);
 }
- 
+
 module.exports = { getDb, saveDb, closeDb, all, get, run, searchNotes };
