@@ -1,26 +1,32 @@
 {
-  "name": "task-tracker",
-  "version": "0.1.0",
-  "private": true,
+  "name": "markdown-notes-api",
+  "version": "1.0.0",
+  "description": "Markdown Note-taking REST API",
+  "main": "src/app.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest --runInBand --forceExit",
+    "test:coverage": "jest --coverage --forceExit",
+    "db:reset": "node -e \"const fs=require('fs');fs.rmSync('./notes.db',{force:true});console.log('DB reset');\""
   },
   "dependencies": {
-    "next": "16.2.4",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "cors": "^2.8.6",
+    "express": "^4.22.1",
+    "marked": "^12.0.2",
+    "morgan": "^1.10.0",
+    "pdfmake": "^0.2.23",
+    "sql.js": "^1.14.1"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "16.2.4",
-    "tailwindcss": "^4",
-    "typescript": "^5"
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.2.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/tests/**/*.test.js"
+    ]
   }
 }
