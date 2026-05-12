@@ -1,0 +1,38 @@
+openapi: 3.0.0
+info:
+  title: Markdown Notes API
+  version: 1.0.0
+  description: AI-Assisted Markdown Note-taking system
+paths:
+  /api/notes:
+    get:
+      summary: Get all notes
+      responses:
+        '200':
+          description: A list of notes
+    post:
+      summary: Create a new note
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title: {type: string}
+                content: {type: string}
+                tags: {type: array, items: {type: string}}
+      responses:
+        '201':
+          description: Created
+  /api/search:
+    get:
+      summary: Search notes
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema: {type: string}
+      responses:
+        '200':
+          description: Search results

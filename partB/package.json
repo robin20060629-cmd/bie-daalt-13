@@ -1,0 +1,25 @@
+{
+  "name": "markdown-notes-api",
+  "version": "1.0.0",
+  "description": "Markdown Note-taking REST API",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
+    "test": "jest --runInBand --forceExit"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "marked": "^12.0.0",
+    "morgan": "^1.10.0",
+    "pdfmake": "^0.2.10",
+    "sql.js": "^1.14.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.0.0"
+  }
+}
